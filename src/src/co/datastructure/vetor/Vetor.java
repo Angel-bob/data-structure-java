@@ -14,13 +14,15 @@ public class Vetor {
 
     //return size
     public int getSize() {
-        return size;
+        return this.size;
     }
 
     //method to add element
     public boolean addElement(String element){
+        this.increaseCapacity();
+
         if(this.size < this.elements.length){
-            this.elements[size] = element;
+            this.elements[this.size] = element;
             size++;
             return true;
         }
@@ -33,6 +35,8 @@ public class Vetor {
             throw new IllegalArgumentException("invalid position");
         }
 
+        this.increaseCapacity();
+
         for (int i = this.size-1; i >= index; i--){
             this.elements[i+1] = this.elements[i];
         }
@@ -40,6 +44,48 @@ public class Vetor {
         this.size++;
         return true;
     }
+
+    //remove element
+    public boolean removeElement(int index){
+        if (!(index >= 0 && index < this.size)) {
+            throw new IllegalArgumentException("Invalid index");
+        }
+
+        for (int i = index; i <= size-1; i++){
+            this.elements[i] = this.elements[i+1];
+        }
+        size--;
+        return true;
+    }
+
+    public void removeElement(String element){
+        int indexEl = 0;
+
+        for(int i = 0; i < this.size; i++){
+            if(this.elements[i].equals(element)){
+                indexEl = i;
+            }
+        }
+
+        for (int i = indexEl; i <= size-1; i++){
+            this.elements[i] = this.elements[i+1];
+        }
+        size--;
+
+
+    }
+
+    //Increasing Vector Capacity
+    private void increaseCapacity(){
+        if(this.size == this.elements.length){
+            String[] newElements = new String[this.elements.length * 2];
+            for(int i = 0; i < this.size; i++){
+                newElements[i] = this.elements[i];
+            }
+            this.elements = newElements;
+        }
+    }
+
 
     //method to get element from a position
     public String getElement(int index){
