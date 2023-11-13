@@ -29,12 +29,17 @@ public class Vetor {
         return false;
     }
 
-    //add element in any position
-    public boolean addElement(int index, String element){
+    //verify index
+    private boolean verifyIndex(int index){
         if (!(index >= 0 && index < this.size)){
             throw new IllegalArgumentException("invalid position");
         }
+        return true;
+    }
 
+    //add element in any position
+    public boolean addElement(int index, String element){
+        this.verifyIndex(index);
         this.increaseCapacity();
 
         for (int i = this.size-1; i >= index; i--){
@@ -47,9 +52,7 @@ public class Vetor {
 
     //remove element
     public boolean removeElement(int index){
-        if (!(index >= 0 && index < this.size)) {
-            throw new IllegalArgumentException("Invalid index");
-        }
+        this.verifyIndex(index);
 
         for (int i = index; i <= size-1; i++){
             this.elements[i] = this.elements[i+1];
@@ -89,9 +92,7 @@ public class Vetor {
 
     //method to get element from a position
     public String getElement(int index){
-        if (!(index >= 0 && index < this.size)){
-            throw new IllegalArgumentException("invalid position");
-        }
+        this.verifyIndex(index);
         return this.elements[index];
     }
 
