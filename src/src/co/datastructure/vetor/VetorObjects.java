@@ -1,14 +1,14 @@
 package co.datastructure.vetor;
 
-public class Vetor {
+public class VetorObjects {
 
     //Attributes
-    private String[] elements;
+    private Object[] elements;
     private int size;
 
     //Constructor
-    public Vetor(int capacity){
-        elements = new String[capacity];
+    public VetorObjects(int capacity){
+        elements = new Object[capacity];
         size = 0;
     }
 
@@ -18,7 +18,7 @@ public class Vetor {
     }
 
     //method to add element
-    public boolean addElement(String element){
+    public boolean addElement(Object element){
         this.increaseCapacity();
 
         if(this.size < this.elements.length){
@@ -38,7 +38,7 @@ public class Vetor {
     }
 
     //add element in any position
-    public boolean addElement(int index, String element){
+    public boolean addElement(int index, Object element){
         this.verifyIndex(index);
         this.increaseCapacity();
 
@@ -61,7 +61,7 @@ public class Vetor {
         return true;
     }
 
-    public void removeElement(String element){
+    public void removeElement(Object element){
         int indexEl = 0;
 
         for(int i = 0; i < this.size; i++){
@@ -81,7 +81,7 @@ public class Vetor {
     //Increasing Vector Capacity
     private void increaseCapacity(){
         if(this.size == this.elements.length){
-            String[] newElements = new String[this.elements.length * 2];
+            Object[] newElements = new Object[this.elements.length * 2];
             for(int i = 0; i < this.size; i++){
                 newElements[i] = this.elements[i];
             }
@@ -91,13 +91,13 @@ public class Vetor {
 
 
     //method to get element from a position
-    public String getElement(int index){
+    public Object getElement(int index){
         this.verifyIndex(index);
         return this.elements[index];
     }
 
     //method to check if element exists
-    public int checkElement(String element){
+    public int checkElement(Object element){
         for(int i = 0; i < this.size; i++){
             if(this.elements[i].equals(element)){
                 return 1;
